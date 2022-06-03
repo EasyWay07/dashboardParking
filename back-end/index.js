@@ -29,6 +29,7 @@ app.get("/api/users/:id", (req, res) => {
 // add a new user
 app.post("/api/users", (req, res) => {
     const newUser = {
+        id: users.length + 1,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
@@ -91,6 +92,7 @@ app.get("/api/items/:id", (req, res) => {
 // ADD A NEW ITEM
 app.post("/api/items", (req, res) => {  
     const newItem = {
+        id: items.length + 1,
         name: req.body.name,
         price: req.body.price,
         description: req.body.description,

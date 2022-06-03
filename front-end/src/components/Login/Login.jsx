@@ -24,7 +24,7 @@ const Login = () => {
       window.localStorage.setItem('role', JSON.stringify(currentUser.isManager));
       setError('')
       if (currentUser.isManager === true) {
-      navigate('/');
+      navigate('/home');
       } else {
       navigate('/items');
       }

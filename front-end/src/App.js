@@ -12,8 +12,8 @@ function App() {
       <div className='container'>
       <div className='main-pages'>
         <Routes>
-          <Route exact path='/' element={ <Home/> } />
-          <Route path="/login" element={ <Login/> } />
+          <Route path='/home' element={ <Home/> } />
+          <Route exact path="/" element={ <Login/> } />
           <Route path="/register" element={ <Register/> } />
           <Route path="/items" element={ <Items/> } />
         </Routes>

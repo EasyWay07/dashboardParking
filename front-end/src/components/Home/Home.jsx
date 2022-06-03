@@ -78,9 +78,8 @@ const Home = () => {
     
     const handleSubmit = async (e) => {
             e.preventDefault();
-            const id = users.length+1;
-            const newUser = { id, name ,email , password , isManager};
-            const editUser = { editId, name ,email , password , isManager};
+            const newUser = { name ,email , password , isManager};
+            console.log(newUser);
             if(editRow === false){
                 axios.post('http://localhost:5000/api/users/', newUser) 
                 .then(res => {
@@ -89,7 +88,7 @@ const Home = () => {
                 })
                 .catch(err => console.log(err))
             }else{
-                axios.put(`http://localhost:5000/api/users/`, editUser)
+                axios.put(`http://localhost:5000/api/users/`, newUser)
                 .catch(err => console.log(err))
             }
             setUsers("");
@@ -126,6 +125,7 @@ const Home = () => {
 
   return (
     <>
+    <div className="elfsight-app-8747515a-675f-492a-a7d8-10e8bc730547"></div>   
         <TopBar/>
         <div className='main-side'>
         <SideBar users ="users" />
@@ -148,7 +148,7 @@ const Home = () => {
         <div className="users-footer">
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="User Name..." onChange={(e) => setName(e.target.value)} value={ name } required/>
-                <input type="text" placeholder="User Email..." onChange={(e) => setEmail(e.target.value)} value={ email } required/>
+                <input type="email" placeholder="User Email..." onChange={(e) => setEmail(e.target.value)} value={ email } required/>
                 <input type="text" placeholder="User Password ..." onChange={(e) => setPassword(e.target.value)} value={ password } required/>
                 <select value={ isManager } onChange={(e) => setIsManager(e.target.value)} required>
                   <option value="nothing">Select Role</option>
@@ -158,7 +158,8 @@ const Home = () => {
                 {
                     editRow ? <button className='btn btn-add'>Edit User</button> : <button className='btn btn-add'>Add User</button>
                 }
-            </form>           
+            </form>        
+            
             </div>
             </div>
         </div>

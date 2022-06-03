@@ -8,7 +8,7 @@ const TopBar = () => {
 
 
   const handleNavigation = () => {
-    navigate('/login')
+    navigate('/')
   }
   return (
     <div className='topbar'>

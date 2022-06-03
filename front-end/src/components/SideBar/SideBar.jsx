@@ -28,7 +28,7 @@ const SideBar = () => {
               {
                 role === "true" ? (
                     <>
-                     <Link to="/"  className='sidebar-item'> 
+                     <Link to="/home"  className='sidebar-item'> 
                         <li onClick={() => setNavHover("users")} className={ navHover === "users" ? "sidebar-list-item active" : "sidebar-list-item" }>
                             <AiOutlineUser className='sidebar-icon'/> 
                             <span>Users</span>
