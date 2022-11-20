@@ -1,0 +1,15 @@
+pipeline {
+  agent any
+    stages {
+        stage('Pull') {
+            steps{
+                script{
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[
+                            credentialsId: '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',
+                            url: 'https://github.com/EasyWay07/dashboardParking.git']]])
+                }
+            }
+        }
+    }
+}
