@@ -1,15 +1,66 @@
+Code_Changes = getGitChanges()
 pipeline {
   agent any
+  environment {
+    Git_Token = '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'
+    Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
+    Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
+    Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
+    APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
+}
     stages {
+        stage('Build') {
+            when {
+                branch == 'main' && Code_Changes == true
+            }
+            steps {
+                echo 'Building...'
+            }
+        }
         stage('Pull') {
             steps{
                 script{
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[
-                            credentialsId: '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',
-                            url: 'https://github.com/EasyWay07/dashboardParking.git']]])
+                            credentialsId: ${Git_Token},
+                            url: ${Dashboard_Repo}
+                        ]]
+                    ])
                 }
+            } 
+        }
+        stage('Test') {
+            when {
+                branch == 'test'
+            }
+            steps {
+                echo 'Deploying...'
             }
         }
+        stage('Deploy') {
+            when {
+                branch == 'main'
+            }
+            steps {
+                echo 'Deploying...'
+            }
+        }
+    }
+    post {
+        always {
+            script {
+                sh 'docker-compose down'
+            }
+        }
+        success {
+            script {
+                sh 'docker-compose up -d'
+            }
+        }
+        failure {
+            script {
+                sh 'docker-compose up -d'
+            }
+        } 
     }
 }
