@@ -1,20 +1,28 @@
 Code_Changes = getGitChanges()
 pipeline {
   agent any
+  parameters {
+    string(name: 'BRANCH', defaultValue: 'master', description: 'Branch to build')
+    choise(name: 'ENVIRONMENT', choices: ['DEV', 'QA', 'PROD'], description: 'Environment to deploy')
+    choise(name: 'VERSION', choices:['1.1.0', '1.2.0','1.3.0'], description: 'Version to deploy')
+    booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy to environment')
+    booleanParam(name: 'EXECUTETESTS', defaultValue: false, description: 'Excute tests')
+  }
   environment {
     Git_Token = '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'
     Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
     Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
     Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
-}
+  }
     stages {
         stage('Build') {
             when {
                 branch == 'main' && Code_Changes == true
             }
             steps {
-                echo 'Building...'
+                sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Pull') {
@@ -31,10 +39,11 @@ pipeline {
         }
         stage('Test') {
             when {
-                branch == 'test'
+                branch == 'test' && params.EXECUTETESTS
             }
             steps {
-                echo 'Deploying...'
+                sh 'npm install'
+                sh 'npm run test'
             }
         }
         stage('Deploy') {
@@ -42,7 +51,9 @@ pipeline {
                 branch == 'main'
             }
             steps {
-                echo 'Deploying...'
+                sh 'npm install'
+                sh 'npm run deploy'
+                echo "Deploying to ${params.ENVIRONMENT}"
             }
         }
     }
