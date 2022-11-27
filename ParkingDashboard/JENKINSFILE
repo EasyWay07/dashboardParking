@@ -15,12 +15,6 @@ pipeline {
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
   }
     stages {
-        stage('Build') {
-            steps {
-                bat 'npm install'
-                bat 'npm run build'
-            }
-        }
         stage('Pull') {
             steps{
                 script{
@@ -33,13 +27,19 @@ pipeline {
                 }
             } 
         }
+        stage('Build') {
+            steps {
+                cmd 'npm install'
+                cmd 'npm run build'
+            }
+        }
         stage('Test') {
            /* when {
                 branch == 'test' && params.EXECUTETESTS
             }*/
             steps {
-                bat 'npm install'
-                bat 'npm run test'
+                cmd 'npm install'
+                cmd 'npm run test'
             }
         }
         stage('Deploy') {
@@ -47,8 +47,8 @@ pipeline {
                 branch == 'main' && params.DEPLOY
             }*/
             steps {
-                bat 'npm install'
-                bat 'npm run deploy'
+                cmd 'npm install'
+                cmd 'npm run deploy'
                 echo "Deploying to ${params.ENVIRONMENT}"
             }
         }
