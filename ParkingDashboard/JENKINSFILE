@@ -30,8 +30,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                bat 'npm install'
-                bat 'npm run build'
+                script {
+                    pwd 'npm install'
+                    pwd 'npm run build'
+                }
             }
         }
         /*stage('Test') {
