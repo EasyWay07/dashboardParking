@@ -15,6 +15,18 @@ pipeline {
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
   }
     stages {
+        stage('Pull') {
+            steps{
+                script{
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[
+                            credentialsId: ${Git_Token},
+                            url: ${Dashboard_Repo}
+                        ]]
+                    ])
+                }
+            }
+        }
         stage('Build') {
             steps {
                 cmd 'npm install'
