@@ -18,6 +18,7 @@ pipeline {
         stage('Pull') {
             steps{
                 script{
+                    echo "Pulling..."
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             credentialsId: ${Git_Token},
