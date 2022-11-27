@@ -30,7 +30,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat "cd ParkingDashboard && npm install"
+                    bat "cd ParkingDashboard"
                     bat 'docker ps -a'
                 }
             }
