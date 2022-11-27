@@ -15,46 +15,25 @@ pipeline {
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
   }
     stages {
-        stage('Pull') {
-            steps{
-                script{
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
-                        userRemoteConfigs: [[
-                            credentialsId: ${Git_Token},
-                            url: ${Dashboard_Repo}
-                        ]]
-                    ])
-                }
-            } 
-        }
         stage('Build') {
             steps {
-                cmd 'npm install'
-                cmd 'npm run build'
+                echo 'Building...'
             }
         }
         stage('Test') {
-           /* when {
-                branch == 'test' && params.EXECUTETESTS
-            }*/
+
             steps {
-                cmd 'npm install'
-                cmd 'npm run test'
+                echo 'Testing...'
             }
         }
         stage('Deploy') {
-           /* when {
-                branch == 'main' && params.DEPLOY
-            }*/
             steps {
-                cmd 'npm install'
-                cmd 'npm run deploy'
-                echo "Deploying to ${params.ENVIRONMENT}"
+                echo 'Deploying...'
             }
         }
     }
     post {
-        always {
+       /* always {
             script {
                 sh 'docker-compose down'
             }
@@ -68,6 +47,6 @@ pipeline {
             script {
                 sh 'docker-compose up -d'
             }
-        } 
+        } */
     }
 }
