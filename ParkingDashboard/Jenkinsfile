@@ -20,8 +20,8 @@ pipeline {
                 script{
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[
-                            credentialsId: ${Git_Token},
-                            url: ${Dashboard_Repo}
+                            credentialsId: Git_Token,
+                            url: Dashboard_Repo
                         ]]
                     ])
                 }
