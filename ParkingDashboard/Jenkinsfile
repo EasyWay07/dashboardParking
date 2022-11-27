@@ -43,7 +43,7 @@ pipeline {
             steps {
                 script {
                     echo "Testing"
-                    //bat "cd ParkingDashboard && npm run test"
+                    bat "npm test"
                 }
             }
         }
