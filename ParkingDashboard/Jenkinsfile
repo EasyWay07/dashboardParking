@@ -51,8 +51,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying"
-                    bat "cd ParkingDashboard && npm install -g serve"
-                    bat "cd ParkingDashboard && serve -s build -l 4000"
+                    bat "cd ParkingDashboard && cp -r build/* /server && cd /server && npm start"
                 }
             }
         }
