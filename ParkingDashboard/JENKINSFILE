@@ -6,7 +6,7 @@ pipeline {
     choise(name: 'ENVIRONMENT', choices: ['DEV', 'QA', 'PROD'], description: 'Environment to deploy')
     choise(name: 'VERSION', choices:['1.1.0', '1.2.0','1.3.0'], description: 'Version to deploy')
     booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy to environment')
-    booleanParam(name: 'EXECUTETESTS', defaultValue: false, description: 'Excute tests')
+    booleanParam(name: 'EXECUTE_TESTS', defaultValue: false, description: 'Excute tests')
   }
   environment {
     Git_Token = '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'
@@ -16,15 +16,6 @@ pipeline {
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
   }
     stages {
-        stage('Build') {
-            when {
-                branch == 'main' && Code_Changes == true
-            }
-            steps {
-                sh 'npm install'
-                sh 'npm run build'
-            }
-        }
         stage('Pull') {
             steps{
                 script{
@@ -37,9 +28,15 @@ pipeline {
                 }
             } 
         }
-        stage('Test') {
+        stage('Build') {
+            steps {
+                cmd 'npm install'
+                cmd 'npm run build'
+            }
+        }
+        /*stage('Test') {
             when {
-                branch == 'test' && params.EXECUTETESTS
+                branch == 'test' && params.EXECUTE_TESTS
             }
             steps {
                 sh 'npm install'
@@ -73,5 +70,5 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         } 
-    }
+    }*/
 }
