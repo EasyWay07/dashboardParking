@@ -43,7 +43,9 @@ pipeline {
             steps {
                 script {
                     echo "Testing"
-                    bat "cd ParkingDashboard && npm run test --passWithNoTests"
+                    bat "cd ParkingDashboard && npm run test"
+                    sleep(15)
+                    bat "a"
                 }
             }
         }
