@@ -30,8 +30,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat "cd ParkingDashboard"
-                    bat 'docker ps -a'
+                    bat "cd ParkingDashboard && npm install --legacy-peer-deps && npm run build"
                 }
             }
         }
