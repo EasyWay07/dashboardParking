@@ -53,6 +53,7 @@ pipeline {
                 script {
                     echo "Deploying"
                     bat "cd ParkingDashboard && npm install -g serve"
+                    bat "cd ParkingDashboard && serve -s build -l 4000"
                 }
             }
         }
