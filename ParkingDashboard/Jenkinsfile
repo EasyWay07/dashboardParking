@@ -30,7 +30,8 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    bat "ipconfig"
+                    bat "npm install"
+                    bat "npm run build"
                 }
             }
         }
