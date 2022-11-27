@@ -15,18 +15,11 @@ pipeline {
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
   }
     stages {
-
-        }
         stage('Build') {
             steps {
-                echo 'Building...'
-                script {
-                    if (params.BRANCH == 'main') {
-                        echo 'Building main branch'
-                    } else {
-                        echo 'Building other branch'
-                    }
-                }
+                cmd 'npm install'
+                cmd 'npm run build'
+                echo "Build  ${params.BRANCH} Done"
             }
         }
         stage('Test') {
@@ -34,7 +27,8 @@ pipeline {
                 branch == 'test' && params.EXECUTE_TESTS
             }*/
             steps {
-                echo 'Testing...'
+                cmd 'npm install'
+                cmd 'npm run test'
             }
         }
         stage('Deploy') {
@@ -42,7 +36,9 @@ pipeline {
                 branch == 'main' && params.DEPLOY
             }*/
             steps {
-                echo 'Deploying...'
+                cmd 'npm install'
+                cmd 'npm run deploy'
+                echo "Deploying to ${params.ENVIRONMENT} version ${params.VERSION}"
             }
         }
     }
