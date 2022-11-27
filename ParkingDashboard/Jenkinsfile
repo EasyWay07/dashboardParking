@@ -1,23 +1,27 @@
 pipeline {
-  agent any
- /* parameters {
+    agent any
+    /* parameters {
     string(name: 'BRANCH', defaultValue: 'master', description: 'Branch to build')
     choise(name: 'ENVIRONMENT', choices: ['DEV', 'QA', 'PROD'], description: 'Environment to deploy')
     choise(name: 'VERSION', choices:['1.1.0', '1.2.0','1.3.0'], description: 'Version to deploy')
     booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy to environment')
     booleanParam(name: 'EXECUTE_TESTS', defaultValue: false, description: 'Excute tests')
-  }*/
-  environment {
-    Git_Token = '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'
-    Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
-    Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
-    Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
-    APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
-  }
+    }*/
+    environment {
+        Git_Token = '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'
+        Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
+        Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
+        Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
+        APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
+    }
+    triggers {
+        pollSCM 'H/5 * * * *'
+    }
     stages {
         stage('Pull') {
             steps{
                 script{
+                    echo "Pulling from Github"
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             credentialsId: Git_Token,
@@ -30,6 +34,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
+                    echo "Building"
                     bat "cd ParkingDashboard && npm install --legacy-peer-deps && npm run build"
                 }
             }
@@ -37,6 +42,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
+                    echo "Testing"
                     bat "cd ParkingDashboard && npm run test"
                 }
             }
@@ -44,6 +50,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    echo "Deploying"
                     bat "cd ParkingDashboard && npm run deploy"
                 }
             }
