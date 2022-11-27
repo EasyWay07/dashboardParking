@@ -15,7 +15,7 @@ pipeline {
         APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
     }
     triggers {
-        pollSCM '* * * * *'
+        pollSCM 'H/5 * * * *'
     }
     stages {
         stage('Pull') {
