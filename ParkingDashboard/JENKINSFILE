@@ -31,8 +31,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    pwd 'npm install'
-                    pwd 'npm run build'
+                    echo "Building"
                 }
             }
         }
@@ -41,8 +40,9 @@ pipeline {
                 branch == 'test' && params.EXECUTE_TESTS
             }
             steps {
-                sh 'npm install'
-                sh 'npm run test'
+                script {
+                    pwd 'npm run test'
+                }   
             }
         }
         stage('Deploy') {
@@ -50,9 +50,11 @@ pipeline {
                 branch == 'main'
             }
             steps {
-                sh 'npm install'
-                sh 'npm run deploy'
-                echo "Deploying to ${params.ENVIRONMENT}"
+                script {
+                    pwd 'npm install'
+                    pwd 'npm run deploy'
+                    echo "Deploying to ${params.ENVIRONMENT}"
+                }
             }
         }
     }
