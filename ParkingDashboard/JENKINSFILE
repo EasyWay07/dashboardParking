@@ -53,7 +53,7 @@ pipeline {
             }
         }
     }
-    post {
+   /* post {
         always {
             script {
                 sh 'docker-compose down'
@@ -69,5 +69,5 @@ pipeline {
                 sh 'docker-compose up -d'
             }
         } 
-    }
+    }*/
 }
