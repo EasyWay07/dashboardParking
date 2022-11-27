@@ -18,7 +18,6 @@ pipeline {
         stage('Pull') {
             steps{
                 script{
-                    bat "ipconfig"
                     checkout([$class: 'GitSCM', branches: [[name: '*/main']],
                         userRemoteConfigs: [[
                             credentialsId: ${Git_Token},
@@ -31,14 +30,14 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Builing..."
+                    bat "ipconfig"
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    echo "Testing..."
+                    pwd "ipconfig"
                 }
             }
         }
