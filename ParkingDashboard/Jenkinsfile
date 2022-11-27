@@ -32,6 +32,7 @@ pipeline {
                 script {
                     bat "npm install"
                     bat "npm run build"
+                    bat 'docker ps -a'
                 }
             }
         }
