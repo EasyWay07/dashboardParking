@@ -7,25 +7,37 @@ pipeline {
     booleanParam(name: 'DEPLOY', defaultValue: false, description: 'Deploy to environment')
     booleanParam(name: 'EXECUTE_TESTS', defaultValue: false, description: 'Excute tests')
   }*/
-  environment {
+  /*environment {
     Git_Token = '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'
     Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
     Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
     Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
     APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
-  }
+  }*/
     stages {
+        stage('Pull') {
+            steps{
+                script{
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']],
+                        userRemoteConfigs: [[
+                            credentialsId: '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',
+                            url: 'https://github.com/EasyWay07/dashboardParking.git'
+                        ]]
+                    ])
+                }
+            } 
+        }
         stage('Build') {
             steps {
                 script {
-                    echo "Building"
+                    bat "ipconfig"
                 }
             }
         }
         stage('Test') {
             steps {
                 script {
-                    echo "Testing"
+                    pwd "ipconfig"
                 }
             }
         }
