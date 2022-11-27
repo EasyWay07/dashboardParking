@@ -17,8 +17,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                pwd 'npm install'
-                pwd 'npm run build'
+                bat 'npm install'
+                bat 'npm run build'
             }
         }
         stage('Pull') {
