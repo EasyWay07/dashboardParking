@@ -34,21 +34,21 @@ pipeline {
             } 
         }
         stage('Test') {
-            when {
+           /* when {
                 branch == 'test' && params.EXECUTETESTS
-            }
+            }*/
             steps {
-                sh 'npm install'
-                sh 'npm run test'
+                bat 'npm install'
+                bat 'npm run test'
             }
         }
         stage('Deploy') {
-            when {
+           /* when {
                 branch == 'main' && params.DEPLOY
-            }
+            }*/
             steps {
-                sh 'npm install'
-                sh 'npm run deploy'
+                bat 'npm install'
+                bat 'npm run deploy'
                 echo "Deploying to ${params.ENVIRONMENT}"
             }
         }
