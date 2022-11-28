@@ -34,7 +34,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    echo "Building"
+                    echo "Building..."
                     bat "cd ParkingDashboard && npm install --legacy-peer-deps && npm run build"
                 }
             }
