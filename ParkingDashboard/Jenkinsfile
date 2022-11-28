@@ -42,7 +42,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    echo "Testing"
+                    echo "Testing..."
                     bat "cd ParkingDashboard && npm run test"
                 }
             }
