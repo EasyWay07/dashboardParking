@@ -15,7 +15,7 @@ pipeline {
         APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
     }
     triggers {
-        pollSCM '*/5 * * * *'
+        pollSCM 'H/5 * * * *'
     }
     stages {
         stage('Pull') {
@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying"
-                    bat "cd ParkingDashboard && npx serve -s build -l 3000"
+                    bat "cd ParkingDashboard && cd /server && npm start"
                 }
             }
         }
