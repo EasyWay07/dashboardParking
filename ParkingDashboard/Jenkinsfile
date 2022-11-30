@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying..."
-                    bat "cd ParkingDashboard && docker login -u alaa97  -p $Docker_Token --password-stdin"
+                    bat "cd ParkingDashboard && docker login -u alaa97  -p ${Docker_Token_PSW} --password-stdin"
                     bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
                     bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                 }
