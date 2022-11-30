@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Image..."
-                    bat "cd ParkingDashboard && docker build -t dashboard ."
+                    bat "cd ParkingDashboard && docker build -t parkingdashboard ."
                 }
             }
         }
@@ -59,8 +59,8 @@ pipeline {
             steps {
                 script {
                     echo "Deploying..."
-                    bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard"
-                    bat "cd ParkingDashboard && docker push easyway07/parkingdashboard"
+                    bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
+                    bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                 }
             }
         }
