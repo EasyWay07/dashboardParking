@@ -8,11 +8,12 @@ pipeline {
     booleanParam(name: 'EXECUTE_TESTS', defaultValue: false, description: 'Excute tests')
     }*/
     environment {
-        Git_Token = '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'
+        Git_Token = credentials('gitToken')
         Dashboard_Repo = 'https://github.com/EasyWay07/dashboardParking.git'
         Mobile_Client_Repo = 'https://github.com/EasyWay07/EasyParkClient.git'
         Mobile_Gardien_Repo = 'https://github.com/EasyWay07/EasyParkGardien.git'
         APi_Repo = 'https://github.com/EasyWay07/EasyParkBackEnd.git'
+        Docker_Token = credentials('dockerToken')
     }
     triggers {
         pollSCM 'H/5 * * * *'
@@ -59,6 +60,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying..."
+                    bat "cd ParkingDashboard && docker login -u alaa97  -p $Docker_Token"
                     bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
                     bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                 }
@@ -72,5 +74,13 @@ pipeline {
                 }
             }
         }*/
+    }
+    post {
+        always {
+            echo "Cleaning up..."
+            bat "cd ParkingDashboard && docker rmi -f parkingdashboard"
+            bat "cd ParkingDashboard && docker rmi -f easyway07/parkingdashboard:latest"
+            bat "docker logout"
+        }
     }
 }
