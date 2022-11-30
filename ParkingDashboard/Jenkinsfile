@@ -50,17 +50,17 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo "Deploying..."
-                     bat "cd ParkingDashboard && docker build -t dashboard ."
+                    echo "Building Docker Image..."
+                    bat "cd ParkingDashboard && docker build -t dashboard ."
                 }
             }
         }
-        /*stage('Push Docker Image to Docker Hub') {
+        stage('Deploy to Docker Hub') {
             steps {
                 script {
-                    echo "Pushing..."
-                    bat "docker tag parkingdashboard easyway07/parkingdashboard:latest"
-                    bat "docker push easyway07/parkingdashboard:latest"
+                    echo "Deploying..."
+                    bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
+                    bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                 }
             }
         }
