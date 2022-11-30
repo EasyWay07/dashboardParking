@@ -51,7 +51,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying..."
-                    bat "docker build -t parkingdashboard ."
+                     bat "cd ParkingDashboard && docker build -t dashboard ."
                 }
             }
         }
