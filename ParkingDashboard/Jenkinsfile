@@ -61,10 +61,9 @@ pipeline {
                 script {
                     echo "Deploying..."
                     withDockerRegistry([credentialsId: Docker_Token, url: ""]) {
-                        bat "cd ParkingDashboard && docker push parkingdashboard"
+                        bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
+                        bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                     }
-                    bat "cd ParkingDashboard && docker tag parkingdashboard easyway07/parkingdashboard:latest"
-                    bat "cd ParkingDashboard && docker push easyway07/parkingdashboard:latest"
                 }
             }
         }
