@@ -52,8 +52,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Image..."
-                    bat  "cd ParkingDashboard && docker.build("parkingdashboard")"
-                    
+                    bat  "cd ParkingDashboard" docker.build("parkingdashboard")
                 }
             }
         }
