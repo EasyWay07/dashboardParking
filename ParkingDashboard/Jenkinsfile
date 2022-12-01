@@ -52,7 +52,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Image..."
-                    bat  "cd ParkingDashboard && dockerImage = docker.build("parkingdashboard")"
+                    bat  "cd ParkingDashboard && docker.build("parkingdashboard")"
                     
                 }
             }
@@ -62,12 +62,11 @@ pipeline {
                 script {
                     echo "Deploying..."
                     withDockerRegistry([ credentialsId: Docker_Token, url: "" ]) {
-                        dockerImage.push()
+                        parkingdashboard.push()
                     }
                 }    
             }
         }
-        
         /*stage('Deploy') {
             steps {
                 script {
