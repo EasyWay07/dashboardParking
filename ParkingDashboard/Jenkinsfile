@@ -61,7 +61,7 @@ pipeline {
                 script {
                     echo "Deploying..."
                     bat "docker logout"
-                    bat "cd ParkingDashboard && docker login -username $Docker_Token_USR"
+                    bat "cd ParkingDashboard && docker login -username $Docker_Token_USR --password-stdin $Docker_Token_PSW"
                     bat "cd ParkingDashboard && docker tag dashboardparking easyway07/parkingdashboard:latest"
                     bat "cd ParkingDashboard && docker push dashboardparking"
                 }    
