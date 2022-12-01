@@ -66,6 +66,16 @@ pipeline {
                     bat "cd ParkingDashboard && docker push dashboardparking"
                 }    
             }
+            post{
+                success { mail to: "alaabouassida97@gmail.com",
+                    subject: "Jenkins Stage : Deploy to Docker Hub is Success",
+                    body: "Deploy to Docker Hub is Success"
+                    echo 'success'}
+                failure { mail to: "alaabouassida97@gmail.com",
+                    subject: "Jenkins Stage : Deploy to Docker Hub is Success",
+                    body: "Deploy to Docker Hub is Success"
+                    echo 'failed'}
+            }
         }
         /*stage('Deploy') {
             steps {
