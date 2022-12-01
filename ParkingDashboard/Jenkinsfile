@@ -62,11 +62,11 @@ pipeline {
                     echo "Deploying..."
                     withDockerRegistry([ credentialsId: Docker_Token, url: "" ]) {
                         dockerImage.push()
-                        }
-                    }    
-                }
+                    }
+                }    
             }
         }
+        
         /*stage('Deploy') {
             steps {
                 script {
