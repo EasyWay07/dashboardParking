@@ -32,7 +32,7 @@ pipeline {
                 }
             } 
         }
-        stage('Build') {
+        /*stage('Build') {
             steps {
                 script {
                     echo "Building..."
@@ -47,7 +47,7 @@ pipeline {
                     bat "cd ParkingDashboard && npm run test"
                 }
             }
-        }
+        }*/
         stage('Build Docker Image') {
             steps {
                 script {
@@ -61,7 +61,7 @@ pipeline {
                 script {
                     echo "Deploying..."
                     bat "docker logout"
-                    bat "echo $Docker_Token_PSW && docker login -u $Docker_Token_USR"
+                    bat "echo $Docker_Token_PSW | docker login -u $Docker_Token_USR"
                     bat "cd ParkingDashboard && docker tag dashboardparking easyway07/parkingdashboard:latest"
                     bat "cd ParkingDashboard && docker push dashboardparking"
                 }    
