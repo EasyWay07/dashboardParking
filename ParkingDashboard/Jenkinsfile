@@ -60,7 +60,11 @@ pipeline {
             steps {
                 script {
                     echo "Deploying..."
-                    bat "cd ParkingDashboard && docker login --username $Docker_Token_USR --password $Docker_Token_PSW && docker image tag dashboardparking easyway07/parkingdashboard:latest && docker image push easyway07/parkingdashboard:latest"
+                    bat "cd ParkingDashboard && docker logout"
+                    bat "cd ParkingDashboard && docker login --username $Docker_Token_USR --password $Docker_Token_PSW"
+                    echo "Login on"
+                    bat "cd ParkingDashboard && docker image tag dashboardparking easyway07/parkingdashboard:latest"
+                    bat "cd ParkingDashboard && docker image push easyway07/parkingdashboard:latest"
                 }    
             }
            /*post{
