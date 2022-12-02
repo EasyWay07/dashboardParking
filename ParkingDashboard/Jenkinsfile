@@ -67,18 +67,20 @@ pipeline {
                     bat "cd ParkingDashboard && docker push $Docker_Token_USR/dashboardparking:latest"
                 }    
             }
-           post{
+           /*post{
                 success { 
-                    emailext body: 'Deploy to Docker Hub is Success', 
-                    subject: 'Jenkins Build', 
-                    to: 'alaabouassida97@gmail.com samerguesmi@gmail.com dali.meftah@gmail.com'
+                    mail to: "alaabouassida97@gmail.com",
+                    subject: "Jenkins Stage : Deploy to Docker Hub is Success",
+                    body: "Deploy to Docker Hub is Success"
+                    echo 'success'
                 }
                 failure { 
-                    emailext body: 'Deploy to Docker Hub is failed', 
-                    subject: 'Jenkins Build', 
-                    to: 'alaabouassida97@gmail.com samerguesmi@gmail.com dali.meftah@gmail.com'
+                    mail to: "alaabouassida97@gmail.com",
+                    subject: "Jenkins Stage : Deploy to Docker Hub is Success",
+                    body: "Deploy to Docker Hub is Success"
+                    echo 'failed'
                 }
-            }
+            }*/
         }
         /*stage('Deploy') {
             steps {
