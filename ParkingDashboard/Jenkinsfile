@@ -90,7 +90,7 @@ pipeline {
                 }
             }
         }*/
-    }//end of stages
+    }//end of 
     post {
         always {
             echo "Cleaning up..."
